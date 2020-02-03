@@ -18,7 +18,7 @@ public class Impression extends Thread {
     public void run() {
         synchronized (System.out) {
             for (int i = 0; i < this.numberOfPages; i++) {
-                System.out.println(this.nameOfDocument + " (" + i + " page)");
+                System.out.println(this.nameOfDocument + " (" + (i + 1) + " page)");
             }
         }
     }

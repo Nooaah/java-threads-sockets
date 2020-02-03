@@ -9,7 +9,7 @@ public class TestImpression {
 
         for (int i = 0; i < nbThreads; i++) {
             synchronized(System.out) {
-                Impression impression = new Impression("Document " + i, (int)(Math.random() * 20));
+                Impression impression = new Impression("Document " + i, (int)(1 + (Math.random() * (20))));
                 impression.start();
                 tab.add(impression);
             }
