@@ -5,7 +5,7 @@ public class MyThread extends Thread {
         for (int i = 0; i < 10; i++) {
             System.out.println("Thread " + i + " en execution");
             try {
-                sleep((int)(Math.random() * 1000));
+                sleep((int) (Math.random() * 1000));
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
             }
