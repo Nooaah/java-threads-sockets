@@ -9,12 +9,9 @@ public class Exercice4 extends Thread {
     }
 
     public void incremente() {
-        int compteurInt = this.compteur;
-
         try {
             sleep(1000);
         } catch (Exception e) {
-            System.err.println(e);
         }
         this.compteur++;
     }

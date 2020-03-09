@@ -13,9 +13,9 @@ public class MainExercice4 {
             thread.start();
             tab.add(thread);
             Scanner scanner = new Scanner(System.in);
-            System.out.print("");
-            String username = scanner.next();
+            String value = scanner.next();
             thread.interrupt();
+            thread.currentThread().interrupt();
         }
 
         try {
@@ -23,7 +23,7 @@ public class MainExercice4 {
                 tab.get(i).join();
             }
         } catch (InterruptedException exc) {
-
+            Thread.currentThread().interrupt();
         }
         System.out.println("Fin des Threads");
 
