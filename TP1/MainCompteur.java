@@ -5,10 +5,10 @@ public class MainCompteur {
 
         int nbThreads = 4;
 
-        ArrayList<Compteur> tab = new ArrayList<Compteur>();
+        ArrayList<Thread> tab = new ArrayList<Thread>();
 
         for (int i = 0; i < nbThreads; i++) {
-            Compteur thread = new Compteur();
+            Thread thread = new Thread(new Compteur());
             thread.start();
             tab.add(thread);
         }

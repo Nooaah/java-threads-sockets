@@ -4,18 +4,18 @@ import java.util.Scanner;
 public class MainExercice4 {
     public static void main(String[] args) {
 
-        int nbThreads = 4;
+        int nbThreads = 1;
 
-        ArrayList<Compteur> tab = new ArrayList<Compteur>();
+        ArrayList<Thread> tab = new ArrayList<Thread>();
 
         for (int i = 0; i < nbThreads; i++) {
-            Compteur thread = new Compteur();
+            Thread thread = new Thread(new Exercice4());
             thread.start();
             tab.add(thread);
             Scanner scanner = new Scanner(System.in);
             System.out.print("");
             String username = scanner.next();
-            //thread.interrupt();
+            thread.interrupt();
         }
 
         try {
@@ -23,6 +23,7 @@ public class MainExercice4 {
                 tab.get(i).join();
             }
         } catch (InterruptedException exc) {
+
         }
         System.out.println("Fin des Threads");
 

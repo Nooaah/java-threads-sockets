@@ -25,5 +25,6 @@ public class Exercice4 extends Thread {
             System.out.println(getName() + " valeur = " + (this.compteur));
         }
         System.out.println("*** Fin de " + getName() + " ***");
+        
     }
 }
