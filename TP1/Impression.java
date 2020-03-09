@@ -1,25 +1,23 @@
-/**
- * Impression
- */
-public class Impression extends Thread {
-    public String nameOfDocument;
-    public int numberOfPages;
+public class Impression implements Runnable {
+    String name;
+    int number;
 
     public Impression() {
-        this.nameOfDocument = "";
-        this.numberOfPages = 0;
+        this.name = "";
+        this.number = 0;
     }
 
-    public Impression(String nameOfDocument, int numberOfPages) {
-        this.nameOfDocument = nameOfDocument;
-        this.numberOfPages = numberOfPages;
+    public Impression(String name, int number) {
+        this.name = name;
+        this.number = number;
     }
 
     public void run() {
         synchronized (System.out) {
-            for (int i = 0; i < this.numberOfPages; i++) {
-                System.out.println(this.nameOfDocument + " (" + (i + 1) + " page)");
+            for (int i = 0; i < this.number; i++) {
+                System.out.println("Document " + this.name + " - page " + i);
             }
         }
     }
+
 }
