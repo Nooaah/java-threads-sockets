@@ -3,7 +3,7 @@
  */
 public class Compteur extends Thread {
     public int compteur;
-    final int MAX = 10;
+    final int MAX = 100;
 
     public Compteur() {
         this.compteur = 0;
