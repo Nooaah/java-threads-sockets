@@ -14,6 +14,7 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 	int hours = currentTime.getHour();
 	int minutes = currentTime.getMinute();
 	double seconds = currentTime.getSecond();
+	boolean horlogeContinue = false;
 
 	/* Méthode paint qui dessine l'horloge */
 	public void paint(Graphics gsp) {
@@ -23,7 +24,9 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 		LocalDateTime currentTime = LocalDateTime.now();
 		int hours = currentTime.getHour();
 		int minutes = currentTime.getMinute();
-		//double seconds = currentTime.getSecond();
+		if (!horlogeContinue) {
+			double seconds = currentTime.getSecond();
+		}
 
 		setBackground(Color.white);
 
@@ -34,7 +37,6 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 		gTmp = imgTmp.getGraphics();
 
 		DessinHorloge.dessineHorloge(gTmp, haut, larg, hours, minutes, seconds);
-		System.out.println(seconds);
 
 		gsp.drawImage(imgTmp, 0, 0, this);
 	}
@@ -49,8 +51,13 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 		while (true) {
 			repaint();
 			try {
-				Thread.sleep(1000 / 10);
-				seconds += 0.1;
+				if (horlogeContinue) {
+					Thread.sleep(1000 / 10);
+					seconds += 0.1;
+				} else {
+					Thread.sleep(1000);
+					seconds += 1.0;
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -59,7 +66,10 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 
 	static public void main(String[] args) {
 		JFrame frame = new JFrame();
+		frame.setlayout(new GridLayout());
 		frame.getContentPane().add(new MonHorlogeBase());
+		JCheckBox exchangingCard1 = new JCheckBox("A");
+        frame.getContentPane().add(exchangingCard1);
 		frame.setBounds(100, 100, 800, 600);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
