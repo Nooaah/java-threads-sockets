@@ -4,6 +4,7 @@
 
 - Horloge en continue avec une variable *horlogeContinue* booléenne
 - Utilisation d'une nouvelle frame qui permet de choisir le mode de l'horloge
+- Modification de l'heure courante
 
 ## Usage
 
