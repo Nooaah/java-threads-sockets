@@ -15,7 +15,7 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 	int minutes = currentTime.getMinute();
 	double seconds = currentTime.getSecond();
 
-	boolean horlogeContinue = true;
+	static boolean horlogeContinue = false;
 
 	public void paint(Graphics gsp) {
 
@@ -64,9 +64,20 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 		}
 	}
 
-	static public void main(String[] args) {
-		JFrame frame = new JFrame();
+	public static void askHorlogeContinue() {
+		Scanner Obj = new Scanner(System.in);
+		System.out.println("Aiguilles des secondes continue ? (y/n) : ");
+		String res = Obj.nextLine();
 
+		if (res.equals("y") || res.equals("Y")) {
+			horlogeContinue = true;
+		}
+	}
+
+	static public void main(String[] args) {
+
+		askHorlogeContinue();
+		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(new MonHorlogeBase());
 		panel.add(new Button("Bouton 3"));
