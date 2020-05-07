@@ -67,7 +67,7 @@ public class DessinHorloge {
 	}
 
 	/* dessin de l'horloge */
-	public static void dessineHorloge(Graphics gTmp, int haut, int larg, int heure, int minutes, int secondes) {
+	public static void dessineHorloge(Graphics gTmp, int haut, int larg, int heure, int minutes, double secondes) {
 
 		int taille = (haut < larg) ? haut : larg;
 

@@ -10,6 +10,11 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 	Image imgTmp;
 	Graphics gTmp;
 
+	LocalDateTime currentTime = LocalDateTime.now();
+	int hours = currentTime.getHour();
+	int minutes = currentTime.getMinute();
+	double seconds = currentTime.getSecond();
+
 	/* Méthode paint qui dessine l'horloge */
 	public void paint(Graphics gsp) {
 
@@ -18,7 +23,7 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 		LocalDateTime currentTime = LocalDateTime.now();
 		int hours = currentTime.getHour();
 		int minutes = currentTime.getMinute();
-		int seconds = currentTime.getSecond();
+		//double seconds = currentTime.getSecond();
 
 		setBackground(Color.white);
 
@@ -29,6 +34,7 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 		gTmp = imgTmp.getGraphics();
 
 		DessinHorloge.dessineHorloge(gTmp, haut, larg, hours, minutes, seconds);
+		System.out.println(seconds);
 
 		gsp.drawImage(imgTmp, 0, 0, this);
 	}
@@ -43,7 +49,8 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 		while (true) {
 			repaint();
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(1000 / 10);
+				seconds += 0.1;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
