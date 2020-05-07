@@ -7,7 +7,8 @@
 ## Usage
 
 ```bash
-cd TP2
+git clone https://github.com/Nooaah/java-threads-sockets.git
+cd java-threads-sockets/TP2
 java MonHorlogeBase
 ```
 
