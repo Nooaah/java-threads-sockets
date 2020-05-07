@@ -4,18 +4,20 @@ import java.applet.*;
 import javax.swing.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.awt.event.*;
 
 public class MonHorlogeBase extends JPanel implements Runnable {
 
 	Image imgTmp;
 	Graphics gTmp;
 
-	LocalDateTime currentTime = LocalDateTime.now();
+	static LocalDateTime currentTime = LocalDateTime.now();
 	int hours = currentTime.getHour();
 	int minutes = currentTime.getMinute();
-	double seconds = currentTime.getSecond();
+	static double seconds = currentTime.getSecond();
 
 	static boolean horlogeContinue = false;
+	static double vitesse = 0.1; // 0.0 < vitesse < 1.0
 
 	public void paint(Graphics gsp) {
 
@@ -28,7 +30,7 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 			double seconds = currentTime.getSecond();
 		}
 
-		setBackground(Color.white);
+		setBackground(Color.red);
 
 		int haut = getHeight();
 		int larg = getWidth();
@@ -52,8 +54,8 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 			repaint();
 			try {
 				if (horlogeContinue) {
-					Thread.sleep(1000 / 10);
-					seconds += 0.1;
+					Thread.sleep((int) (1000 * vitesse));
+					seconds += vitesse;
 				} else {
 					Thread.sleep(1000);
 					seconds += 1.0;
@@ -64,29 +66,50 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 		}
 	}
 
-	public static void askHorlogeContinue() {
-		Scanner Obj = new Scanner(System.in);
-		System.out.println("Aiguilles des secondes continue ? (y/n) : ");
-		String res = Obj.nextLine();
 
-		if (res.equals("y") || res.equals("Y")) {
-			horlogeContinue = true;
-		}
+	public static void refreshSeconds() {
+		currentTime = LocalDateTime.now();
+		seconds = currentTime.getSecond();
 	}
 
 	static public void main(String[] args) {
-
-		askHorlogeContinue();
 		JFrame frame = new JFrame();
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(new MonHorlogeBase());
-		panel.add(new Button("Bouton 3"));
-
-		//frame.add(panel);
-
+		frame.add(new MonHorlogeBase());
 		frame.setBounds(100, 100, 800, 600);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JFrame frame2 = new JFrame();
+		JPanel panel = new JPanel();
+
+		JCheckBox checkBoxContinue = new JCheckBox("Horloge continue");
+		checkBoxContinue.setSelected(horlogeContinue);
+		panel.add(checkBoxContinue);
+		checkBoxContinue.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				refreshSeconds();
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					horlogeContinue = true;
+				} else {
+					horlogeContinue = false;
+				}
+				;
+			}
+		});
+
+		Button buttonChronometer = new Button("Chronomètre");
+		panel.add(buttonChronometer);
+		buttonChronometer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("chrono");
+			}
+		});
+
+		frame2.add(panel);
+		frame2.setBounds(920, 100, 200, 600);
+		frame2.setVisible(true);
+		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
 

@@ -3,6 +3,7 @@
 ## Amélioration durant la séance du *07/05/2020*
 
 - Horloge en continue avec une variable *horlogeContinue* booléenne
+- Utilisation d'une nouvelle frame qui permet de choisir le mode de l'horloge
 
 ## Usage
 
