@@ -2,7 +2,7 @@
 
 ## Amélioration durant la séance du *07/05/2020*
 
-- Horloge en continue avec une variable *horlogeContinue* booléenne
+- Horloge en continue avec une variable *horlogeContinue* booléenne (sous forme de checkbox)
 - Utilisation d'une nouvelle frame qui permet de choisir le mode de l'horloge
 - Modification de l'heure courante
 
