@@ -12,23 +12,28 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 	Graphics gTmp;
 
 	static LocalDateTime currentTime = LocalDateTime.now();
-	int hours = currentTime.getHour();
-	int minutes = currentTime.getMinute();
+	static int hours = currentTime.getHour();
+	static int minutes = currentTime.getMinute();
 	static double seconds = currentTime.getSecond();
 
 	static boolean horlogeContinue = false;
 	static double vitesse = 0.1; // 0.0 < vitesse < 1.0
 
-	public void paint(Graphics gsp) {
 
-		super.paint(gsp);
-
+	public void getInformations() {
 		LocalDateTime currentTime = LocalDateTime.now();
 		int hours = currentTime.getHour();
 		int minutes = currentTime.getMinute();
 		if (!horlogeContinue) {
 			double seconds = currentTime.getSecond();
 		}
+	}
+
+	public void paint(Graphics gsp) {
+
+		super.paint(gsp);
+
+		getInformations();
 
 		setBackground(Color.red);
 
@@ -73,13 +78,14 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 	}
 
 	static public void main(String[] args) {
-		JFrame frame = new JFrame();
+		JFrame frame = new JFrame("Horloge");
 		frame.add(new MonHorlogeBase());
 		frame.setBounds(100, 100, 800, 600);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JFrame frame2 = new JFrame();
+
+		JFrame frame2 = new JFrame("Configuration Horloge");
 		JPanel panel = new JPanel();
 
 		JCheckBox checkBoxContinue = new JCheckBox("Horloge continue");
@@ -105,9 +111,33 @@ public class MonHorlogeBase extends JPanel implements Runnable {
 				System.out.println("chrono");
 			}
 		});
+		JPanel panelHeure = new JPanel();
+		JTextField textHours = new JTextField(Integer.toString(hours), 2);
+		JTextField textMinutes = new JTextField(Integer.toString(minutes), 2);
+		JTextField textSeconds = new JTextField(Double.toString(seconds), 3);
+		panelHeure.add(textHours);
+		panelHeure.add(textMinutes);
+		panelHeure.add(textSeconds);
+		
+		JPanel panel4 = new JPanel();
+		Button buttonChange = new Button("Modifier heure");
+		buttonChange.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(textHours.getText());
+				System.out.println(textMinutes.getText());
+				System.out.println(textSeconds.getText());
+			}
+		});
+		panel4.add(buttonChange);
+
+		
+		//panelHeure.add("South", buttonChange);
+
+		panel.add(panelHeure);
+		panel.add(panel4);
 
 		frame2.add(panel);
-		frame2.setBounds(920, 100, 200, 600);
+		frame2.setBounds(920, 100, 220, 600);
 		frame2.setVisible(true);
 		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
